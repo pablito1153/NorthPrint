@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-space), system-ui, sans-serif;
+  --color-cream: #F5F2ED;
+  --color-ink: #0D0D0D;
+  --color-lime: #C8F135;
+  --color-lime-dark: #A8D120;
+  --color-muted: #8A8A8A;
+  --color-border: #E2DDD6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
