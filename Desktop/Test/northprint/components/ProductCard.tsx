@@ -12,108 +12,90 @@ interface ProductCardProps {
   image: string;
   colors: string[];
   inStock: boolean;
+  category: string;
 }
 
-export function ProductCard({
-  id,
-  name,
-  description,
-  price,
-  image,
-  colors,
-  inStock,
-}: ProductCardProps) {
+const COLOR_MAP: Record<string, string> = {
+  Blanco: '#F5F5F5',
+  Negro: '#1A1A1A',
+  Gris: '#9CA3AF',
+  Marino: '#1E3A5F',
+};
+
+export function ProductCard({ id, name, description, price, image, colors, inStock, category }: ProductCardProps) {
   const [selectedColor, setSelectedColor] = useState(colors[0] || 'Negro');
-  const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
   const addItem = useCart((state) => state.addItem);
 
-  const handleAddToCart = () => {
-    const cartItem: CartItem = {
-      productId: id,
-      name,
-      price,
-      color: selectedColor,
-      quantity,
-      image,
-    };
-    addItem(cartItem);
-    alert(`${name} agregado al carrito`);
-    setQuantity(1);
+  const handleAdd = () => {
+    addItem({ productId: id, name, price, color: selectedColor, quantity: 1, image });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1800);
   };
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-lg transition">
+    <div className="group bg-white rounded-2xl overflow-hidden flex flex-col" style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)' }}>
       {/* Image */}
-      <div className="relative w-full h-64 bg-gray-100">
+      <div className="relative aspect-square overflow-hidden bg-[#F0EDE8]">
         <img
           src={image}
           alt={name}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         />
+        <div className="absolute top-3 left-3">
+          <span className="bg-white/90 backdrop-blur-sm text-[#0D0D0D] text-[11px] font-semibold px-2.5 py-1 rounded-full uppercase tracking-wide">
+            {category}
+          </span>
+        </div>
         {!inStock && (
-          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-            <span className="text-white font-semibold">Sin Stock</span>
+          <div className="absolute inset-0 bg-[#F5F2ED]/80 backdrop-blur-sm flex items-center justify-center">
+            <span className="text-[#0D0D0D] font-semibold text-sm border border-[#0D0D0D] px-4 py-1.5 rounded-full">
+              Sin stock
+            </span>
           </div>
         )}
       </div>
 
-      {/* Content */}
-      <div className="p-4">
-        <h3 className="text-lg font-semibold text-black mb-2">{name}</h3>
-        <p className="text-gray-600 text-sm mb-4">{description}</p>
+      {/* Info */}
+      <div className="p-4 flex flex-col flex-1">
+        <div className="flex items-start justify-between gap-2 mb-1">
+          <h3 className="font-semibold text-[#0D0D0D] text-sm leading-snug">{name}</h3>
+          <span className="text-sm font-bold text-[#0D0D0D] whitespace-nowrap">
+            ${(price / 1000).toFixed(0)}k
+          </span>
+        </div>
+        <p className="text-[#8A8A8A] text-xs mb-4 leading-relaxed">{description}</p>
 
         {/* Colors */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Color
-          </label>
-          <div className="flex gap-2">
-            {colors.map((color) => (
-              <button
-                key={color}
-                onClick={() => setSelectedColor(color)}
-                className={`px-3 py-1 text-xs font-medium rounded border transition ${
-                  selectedColor === color
-                    ? 'bg-black text-white border-black'
-                    : 'bg-gray-100 text-gray-700 border-gray-300 hover:border-gray-500'
-                }`}
-              >
-                {color}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Quantity */}
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Cantidad
-          </label>
-          <select
-            value={quantity}
-            onChange={(e) => setQuantity(parseInt(e.target.value))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-black"
-          >
-            {[1, 2, 3, 4, 5, 10].map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Price */}
-        <div className="text-2xl font-bold text-black mb-4">
-          ${(price * quantity).toFixed(2)}
+        <div className="flex items-center gap-1.5 mb-4">
+          {colors.map((color) => (
+            <button
+              key={color}
+              onClick={() => setSelectedColor(color)}
+              title={color}
+              style={{ backgroundColor: COLOR_MAP[color] || '#ccc' }}
+              className={`w-5 h-5 rounded-full border transition-all ${
+                selectedColor === color
+                  ? 'ring-2 ring-offset-1 ring-[#0D0D0D] scale-110'
+                  : 'hover:scale-110 border-[#E2DDD6]'
+              }`}
+            />
+          ))}
         </div>
 
         {/* Button */}
         <button
-          onClick={handleAddToCart}
+          onClick={handleAdd}
           disabled={!inStock}
-          className="w-full bg-black text-white py-2 rounded-lg font-semibold hover:bg-gray-800 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className={`mt-auto w-full py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+            added
+              ? 'bg-[#C8F135] text-[#0D0D0D]'
+              : inStock
+              ? 'bg-[#0D0D0D] text-[#F5F2ED] hover:bg-[#2D2D2D] active:scale-[0.98]'
+              : 'bg-[#E2DDD6] text-[#8A8A8A] cursor-not-allowed'
+          }`}
         >
-          {inStock ? 'Agregar al Carrito' : 'Sin Stock'}
+          {added ? '✓ Listo!' : inStock ? 'Agregar' : 'Sin stock'}
         </button>
       </div>
     </div>

@@ -1,67 +1,78 @@
 'use client';
 
 import Link from 'next/link';
+import { useState } from 'react';
 import { useCart } from '@/lib/cart';
 
 export function Header() {
   const items = useCart((state) => state.items);
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <h1 className="text-2xl font-bold text-black">NorthPrint</h1>
-          </Link>
+    <header className="sticky top-0 z-50 bg-[#F5F2ED]/95 backdrop-blur-sm border-b border-[#E2DDD6]">
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
 
-          {/* Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-black transition">
-              Catálogo
-            </Link>
-            <Link href="/custom-design" className="text-gray-700 hover:text-black transition">
-              Mi Diseño
-            </Link>
-            <Link href="/policies" className="text-gray-700 hover:text-black transition">
-              Info
-            </Link>
-          </nav>
+        <Link href="/" className="font-bold text-xl tracking-tight text-[#0D0D0D]">
+          NORTH<span className="text-[#0D0D0D]">PRINT</span>
+        </Link>
 
-          {/* Cart */}
+        <nav className="hidden md:flex items-center gap-8">
+          {[
+            { href: '/', label: 'Catálogo' },
+            { href: '/custom-design', label: 'Mi Diseño' },
+            { href: '/policies', label: 'Info' },
+          ].map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="text-sm text-[#8A8A8A] hover:text-[#0D0D0D] transition-colors font-medium"
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-4">
           <Link
             href="/"
-            className="relative flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 transition"
+            className="flex items-center gap-2 bg-[#0D0D0D] text-[#F5F2ED] text-sm font-semibold px-4 py-2 rounded-full hover:bg-[#2D2D2D] transition-colors"
           >
-            <svg
-              className="w-6 h-6 text-gray-700"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-              />
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
-            {itemCount > 0 && (
-              <span className="absolute top-0 right-0 -mt-2 -mr-2 bg-black text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                {itemCount}
-              </span>
-            )}
+            {itemCount > 0 ? `(${itemCount})` : 'Bolsa'}
           </Link>
 
-          {/* Mobile menu button */}
-          <button className="md:hidden p-2 rounded-md text-gray-700 hover:text-black">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+          <button
+            className="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-1.5"
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            <span className={`w-5 h-0.5 bg-[#0D0D0D] transition-all ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`w-5 h-0.5 bg-[#0D0D0D] transition-all ${mobileOpen ? 'opacity-0' : ''}`} />
+            <span className={`w-5 h-0.5 bg-[#0D0D0D] transition-all ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`} />
           </button>
         </div>
       </div>
+
+      {mobileOpen && (
+        <div className="md:hidden border-t border-[#E2DDD6] bg-[#F5F2ED] px-6 py-4 flex flex-col gap-3">
+          {[
+            { href: '/', label: 'Catálogo' },
+            { href: '/custom-design', label: 'Mi Diseño' },
+            { href: '/policies', label: 'Info' },
+          ].map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              className="text-sm font-medium text-[#0D0D0D] py-1"
+              onClick={() => setMobileOpen(false)}
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
+      )}
     </header>
   );
 }
