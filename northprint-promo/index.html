@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #F5F2ED;
+      }
+      .scene {
+        position: absolute;
+        top: 0; left: 0;
+        width: 1920px; height: 1080px;
+        overflow: hidden;
+      }
+      #scene1 { z-index: 1; background: #F5F2ED; }
+      #scene2 { z-index: 2; background: #F5F2ED; opacity: 0; }
+      #scene3 { z-index: 3; background: #0D0D0D; opacity: 0; }
+      #scene4 { z-index: 4; background: #F5F2ED; opacity: 0; }
+      #wipe-a {
+        position: absolute; top: 0; left: 0;
+        width: 1920px; height: 1080px;
+        background: #0D0D0D; z-index: 100;
+      }
+      #wipe-b {
+        position: absolute; top: 0; left: 0;
+        width: 1920px; height: 1080px;
+        background: #C8F135; z-index: 101;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="22"
+      data-width="1920"
+      data-height="1080"
+    >
+
+      <!-- ══════════════════════════════════════
+           SCENE 1 — Brand Reveal (0–4.5s)
+      ══════════════════════════════════════ -->
+      <div id="scene1" class="scene">
+
+        <!-- Ghost decorative -->
+        <div id="s1-ghost" style="position:absolute;top:50px;left:-20px;font-family:'Space Grotesk',sans-serif;font-size:290px;font-weight:800;color:#0D0D0D;opacity:0;white-space:nowrap;line-height:1;pointer-events:none;letter-spacing:-0.03em;">NORTHPRINT</div>
+
+        <!-- Corner registration marks -->
+        <div id="s1-marks" style="position:absolute;top:72px;left:160px;">
+          <div style="width:22px;height:2px;background:#C8F135;position:absolute;top:0;left:0;"></div>
+          <div style="width:2px;height:22px;background:#C8F135;position:absolute;top:0;left:0;"></div>
+        </div>
+
+        <!-- Top-right label -->
+        <div id="s1-label" style="position:absolute;top:72px;right:160px;display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#C8F135;flex-shrink:0;"></div>
+          <span style="font-size:13px;font-weight:600;color:#8A8A8A;letter-spacing:0.15em;text-transform:uppercase;">Estampado DTF · Hecho a pedido</span>
+        </div>
+
+        <!-- Main content -->
+        <div style="position:absolute;top:0;left:0;width:1920px;height:1080px;display:flex;flex-direction:column;justify-content:center;padding:120px 160px;box-sizing:border-box;">
+          <div id="s1-north" style="font-family:'Space Grotesk',sans-serif;font-size:148px;font-weight:800;letter-spacing:-0.04em;line-height:1;color:#0D0D0D;">NORTH</div>
+          <div id="s1-print" style="font-family:'Space Grotesk',sans-serif;font-size:148px;font-weight:300;font-style:italic;letter-spacing:-0.04em;line-height:1;color:#0D0D0D;margin-top:-10px;">PRINT</div>
+          <div id="s1-rule" style="width:100px;height:3px;background:#C8F135;margin:36px 0;transform-origin:left center;transform:scaleX(0);"></div>
+          <div id="s1-tag1" style="font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:700;color:#0D0D0D;line-height:1.2;">Tu estilo,</div>
+          <div id="s1-tag2" style="font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:300;font-style:italic;color:#0D0D0D;line-height:1.2;">a tu manera.</div>
+          <div id="s1-stats" style="display:flex;gap:64px;margin-top:56px;padding-top:28px;border-top:1.5px solid #E2DDD6;font-family:'Space Grotesk',sans-serif;">
+            <div><p style="font-size:30px;font-weight:800;color:#0D0D0D;font-variant-numeric:tabular-nums;">100%</p><p style="font-size:12px;font-weight:600;color:#8A8A8A;letter-spacing:0.12em;text-transform:uppercase;margin-top:4px;">Algodón</p></div>
+            <div><p style="font-size:30px;font-weight:800;color:#C8F135;">DTF</p><p style="font-size:12px;font-weight:600;color:#8A8A8A;letter-spacing:0.12em;text-transform:uppercase;margin-top:4px;">Tecnología</p></div>
+            <div><p style="font-size:30px;font-weight:800;color:#0D0D0D;font-variant-numeric:tabular-nums;">5–7d</p><p style="font-size:12px;font-weight:600;color:#8A8A8A;letter-spacing:0.12em;text-transform:uppercase;margin-top:4px;">Entrega</p></div>
+            <div><p style="font-size:30px;font-weight:800;color:#0D0D0D;">∞</p><p style="font-size:12px;font-weight:600;color:#8A8A8A;letter-spacing:0.12em;text-transform:uppercase;margin-top:4px;">Colores</p></div>
+          </div>
+        </div>
+
+        <div id="s1-corner" style="position:absolute;bottom:72px;right:160px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;color:#C8C5BF;letter-spacing:0.2em;text-transform:uppercase;">NORTHPRINT ® 2024</div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SCENE 2 — Products (5.1–11.5s)
+      ══════════════════════════════════════ -->
+      <div id="scene2" class="scene">
+
+        <!-- Ghost decorative -->
+        <div id="s2-ghost" style="position:absolute;top:160px;right:80px;font-family:'Space Grotesk',sans-serif;font-size:260px;font-weight:800;color:#0D0D0D;opacity:0;line-height:1;pointer-events:none;letter-spacing:-0.04em;">06</div>
+
+        <!-- Left: product list -->
+        <div style="position:absolute;top:0;left:0;width:900px;height:1080px;display:flex;flex-direction:column;justify-content:center;padding:120px 80px 120px 160px;box-sizing:border-box;">
+
+          <div id="s2-label" style="display:flex;align-items:center;gap:10px;margin-bottom:32px;font-family:'Space Grotesk',sans-serif;">
+            <div style="width:8px;height:8px;border-radius:50%;background:#C8F135;flex-shrink:0;"></div>
+            <span style="font-size:12px;font-weight:600;color:#8A8A8A;letter-spacing:0.15em;text-transform:uppercase;">Colección</span>
+          </div>
+
+          <div id="s2-headline" style="font-family:'Space Grotesk',sans-serif;font-size:72px;font-weight:800;letter-spacing:-0.03em;line-height:1;color:#0D0D0D;margin-bottom:44px;">Remeras<br><span style="font-weight:300;font-style:italic;">de autor.</span></div>
+
+          <div id="s2-card1" style="display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-top:1.5px solid #E2DDD6;font-family:'Space Grotesk',sans-serif;">
+            <div>
+              <p style="font-size:22px;font-weight:700;color:#0D0D0D;">Minimal Type</p>
+              <p style="font-size:12px;font-weight:600;color:#8A8A8A;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;">Minimalista</p>
+            </div>
+            <div style="text-align:right;">
+              <p style="font-size:22px;font-weight:700;color:#0D0D0D;font-variant-numeric:tabular-nums;">$25.990</p>
+              <div style="display:flex;gap:5px;justify-content:flex-end;margin-top:7px;">
+                <div style="width:10px;height:10px;border-radius:50%;background:#F5F2ED;border:1.5px solid #C8C5BF;"></div>
+                <div style="width:10px;height:10px;border-radius:50%;background:#0D0D0D;"></div>
+                <div style="width:10px;height:10px;border-radius:50%;background:#8A8A8A;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="s2-card2" style="display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-top:1.5px solid #E2DDD6;font-family:'Space Grotesk',sans-serif;">
+            <div>
+              <p style="font-size:22px;font-weight:700;color:#0D0D0D;">Street Icon</p>
+              <p style="font-size:12px;font-weight:600;color:#8A8A8A;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;">Urbano</p>
+            </div>
+            <div style="text-align:right;">
+              <p style="font-size:22px;font-weight:700;color:#0D0D0D;font-variant-numeric:tabular-nums;">$29.990</p>
+              <div style="display:flex;gap:5px;justify-content:flex-end;margin-top:7px;">
+                <div style="width:10px;height:10px;border-radius:50%;background:#0D0D0D;"></div>
+                <div style="width:10px;height:10px;border-radius:50%;background:#F5F2ED;border:1.5px solid #C8C5BF;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="s2-card3" style="display:flex;align-items:center;justify-content:space-between;padding:22px 0;border-top:1.5px solid #E2DDD6;border-bottom:1.5px solid #E2DDD6;font-family:'Space Grotesk',sans-serif;">
+            <div>
+              <p style="font-size:22px;font-weight:700;color:#0D0D0D;">Geometric</p>
+              <p style="font-size:12px;font-weight:600;color:#8A8A8A;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;">Moderno</p>
+            </div>
+            <div style="text-align:right;">
+              <p style="font-size:22px;font-weight:700;color:#0D0D0D;font-variant-numeric:tabular-nums;">$26.990</p>
+              <div style="display:flex;gap:5px;justify-content:flex-end;margin-top:7px;">
+                <div style="width:10px;height:10px;border-radius:50%;background:#0D0D0D;"></div>
+                <div style="width:10px;height:10px;border-radius:50%;background:#8A8A8A;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: stat + chips -->
+        <div style="position:absolute;top:0;left:900px;width:1020px;height:1080px;display:flex;flex-direction:column;justify-content:center;padding:120px 160px 120px 120px;box-sizing:border-box;">
+          <div id="s2-vrule" style="position:absolute;left:0;top:180px;width:3px;height:720px;background:#C8F135;transform-origin:top center;transform:scaleY(0);"></div>
+          <div id="s2-big" style="font-family:'Space Grotesk',sans-serif;font-size:200px;font-weight:800;color:#0D0D0D;line-height:1;letter-spacing:-0.04em;">06</div>
+          <div id="s2-biglab" style="font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:500;color:#8A8A8A;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px;">modelos disponibles</div>
+          <div id="s2-chips" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:44px;font-family:'Space Grotesk',sans-serif;">
+            <span style="font-size:13px;font-weight:600;color:#0D0D0D;border:1.5px solid #E2DDD6;border-radius:999px;padding:6px 16px;">Minimalista</span>
+            <span style="font-size:13px;font-weight:600;color:#0D0D0D;border:1.5px solid #E2DDD6;border-radius:999px;padding:6px 16px;">Urbano</span>
+            <span style="font-size:13px;font-weight:600;color:#0D0D0D;border:1.5px solid #E2DDD6;border-radius:999px;padding:6px 16px;">Clásico</span>
+            <span style="font-size:13px;font-weight:600;color:#0D0D0D;background:#C8F135;border:1.5px solid #C8F135;border-radius:999px;padding:6px 16px;">Moderno</span>
+          </div>
+        </div>
+
+        <div id="s2-corner" style="position:absolute;bottom:72px;right:160px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;color:#C8C5BF;letter-spacing:0.2em;text-transform:uppercase;">NORTHPRINT ® 2024</div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SCENE 3 — DTF Dark (12.1–16.5s)
+      ══════════════════════════════════════ -->
+      <div id="scene3" class="scene">
+
+        <!-- Ghost decorative -->
+        <div id="s3-ghost" style="position:absolute;top:50px;left:-50px;font-family:'Space Grotesk',sans-serif;font-size:380px;font-weight:800;color:#C8F135;opacity:0;white-space:nowrap;line-height:1;pointer-events:none;letter-spacing:-0.04em;">DTF</div>
+
+        <!-- Corner marks -->
+        <div id="s3-marks" style="position:absolute;top:72px;right:160px;">
+          <div style="width:24px;height:2px;background:#C8F135;position:absolute;top:0;right:0;"></div>
+          <div style="width:2px;height:24px;background:#C8F135;position:absolute;top:0;right:0;"></div>
+        </div>
+
+        <!-- Top label -->
+        <div id="s3-label" style="position:absolute;top:72px;left:160px;display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#C8F135;flex-shrink:0;"></div>
+          <span style="font-size:13px;font-weight:600;color:#8A8A8A;letter-spacing:0.15em;text-transform:uppercase;">Tecnología de impresión</span>
+        </div>
+
+        <!-- Main content -->
+        <div style="position:absolute;top:0;left:0;width:1200px;height:1080px;display:flex;flex-direction:column;justify-content:center;padding:120px 80px 120px 160px;box-sizing:border-box;">
+          <div id="s3-small" style="font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:600;color:#8A8A8A;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:16px;">Estampado</div>
+          <div id="s3-dtf" style="font-family:'Space Grotesk',sans-serif;font-size:190px;font-weight:800;color:#C8F135;letter-spacing:-0.04em;line-height:0.88;">DTF</div>
+          <div id="s3-premium" style="font-family:'Space Grotesk',sans-serif;font-size:72px;font-weight:300;font-style:italic;color:#F5F2ED;letter-spacing:-0.02em;margin-top:8px;">Premium.</div>
+          <div id="s3-rule" style="width:120px;height:3px;background:#C8F135;margin:36px 0;transform-origin:left center;transform:scaleX(0);"></div>
+          <div id="s3-sub" style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:400;color:#8A8A8A;line-height:1.6;">Hecho a pedido · Entrega 5–7 días · Color full print</div>
+        </div>
+
+        <!-- Specs panel -->
+        <div id="s3-specs" style="position:absolute;top:300px;right:160px;font-family:'Space Grotesk',sans-serif;text-align:right;">
+          <div style="margin-bottom:32px;">
+            <p style="font-size:11px;font-weight:600;color:#8A8A8A;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;">Resolución</p>
+            <p style="font-size:32px;font-weight:700;color:#F5F2ED;font-variant-numeric:tabular-nums;">1200 dpi</p>
+          </div>
+          <div style="margin-bottom:32px;">
+            <p style="font-size:11px;font-weight:600;color:#8A8A8A;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;">Colores</p>
+            <p style="font-size:32px;font-weight:700;color:#F5F2ED;">∞ CMYK+W</p>
+          </div>
+          <div>
+            <p style="font-size:11px;font-weight:600;color:#8A8A8A;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;">Material</p>
+            <p style="font-size:32px;font-weight:700;color:#F5F2ED;">100% Cotton</p>
+          </div>
+        </div>
+
+        <div id="s3-corner" style="position:absolute;bottom:72px;right:160px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;color:#333333;letter-spacing:0.2em;text-transform:uppercase;">NORTHPRINT ® 2024</div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SCENE 4 — CTA (17–22s)
+      ══════════════════════════════════════ -->
+      <div id="scene4" class="scene">
+
+        <!-- Ghost decorative -->
+        <div id="s4-ghost" style="position:absolute;top:140px;right:-40px;font-family:'Space Grotesk',sans-serif;font-size:250px;font-weight:800;color:#0D0D0D;opacity:0;white-space:nowrap;line-height:1;pointer-events:none;letter-spacing:-0.03em;">DISEÑO</div>
+
+        <!-- Top label -->
+        <div id="s4-label" style="position:absolute;top:72px;left:160px;display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#C8F135;flex-shrink:0;"></div>
+          <span style="font-size:13px;font-weight:600;color:#8A8A8A;letter-spacing:0.15em;text-transform:uppercase;">Diseño personalizado</span>
+        </div>
+
+        <!-- Main CTA -->
+        <div style="position:absolute;top:0;left:0;width:1100px;height:1080px;display:flex;flex-direction:column;justify-content:center;padding:120px 80px 120px 160px;box-sizing:border-box;">
+          <div id="s4-q1" style="font-family:'Space Grotesk',sans-serif;font-size:110px;font-weight:800;letter-spacing:-0.04em;line-height:0.92;color:#0D0D0D;">¿Tenés tu</div>
+          <div id="s4-q2" style="font-family:'Space Grotesk',sans-serif;font-size:110px;font-weight:300;font-style:italic;letter-spacing:-0.04em;line-height:0.92;color:#0D0D0D;">propio diseño?</div>
+          <div id="s4-sub" style="font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:400;color:#8A8A8A;margin-top:36px;line-height:1.5;">Subí tu arte y lo estampamos en pecho, espalda o los dos.</div>
+          <div id="s4-btn" style="display:inline-flex;align-items:center;gap:12px;background:#0D0D0D;color:#F5F2ED;font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;padding:22px 48px;border-radius:999px;margin-top:48px;width:fit-content;">
+            Cargar mi diseño <span>→</span>
+          </div>
+          <div id="s4-accent" style="width:80px;height:5px;background:#C8F135;border-radius:3px;margin-top:52px;transform-origin:left center;"></div>
+        </div>
+
+        <!-- Brand info right -->
+        <div id="s4-brand" style="position:absolute;top:300px;right:160px;font-family:'Space Grotesk',sans-serif;text-align:right;">
+          <p style="font-size:18px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#0D0D0D;margin-bottom:8px;">NORTHPRINT</p>
+          <p style="font-size:14px;font-weight:400;color:#8A8A8A;">northprint.com.ar</p>
+        </div>
+
+        <div id="s4-corner" style="position:absolute;bottom:72px;right:160px;font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;color:#C8C5BF;letter-spacing:0.2em;text-transform:uppercase;">NORTHPRINT ® 2024</div>
+      </div>
+
+      <!-- Wipe blocks for S2→S3 transition -->
+      <div id="wipe-a"></div>
+      <div id="wipe-b"></div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      var tl = gsap.timeline({ paused: true });
+
+      // Push wipes off-screen immediately
+      tl.set("#wipe-a", { x: -1920 }, 0.01);
+      tl.set("#wipe-b", { x: -1920 }, 0.01);
+
+      // ── SCENE 1 ENTRANCES ──
+      tl.to("#s1-ghost",   { opacity: 0.05, duration: 1.5, ease: "power1.out" }, 0.1);
+      tl.from("#s1-marks", { opacity: 0, duration: 0.4, ease: "power2.out" }, 0.2);
+      tl.from("#s1-label", { x: -20, opacity: 0, duration: 0.5, ease: "power3.out" }, 0.3);
+      tl.from("#s1-north", { x: -60, opacity: 0, duration: 0.7, ease: "expo.out" }, 0.4);
+      tl.from("#s1-print", { x: 60,  opacity: 0, duration: 0.7, ease: "expo.out" }, 0.55);
+      tl.to(  "#s1-rule",  { scaleX: 1, duration: 0.6, ease: "power3.out" }, 0.75);
+      tl.from("#s1-tag1",  { y: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 0.9);
+      tl.from("#s1-tag2",  { y: 20, opacity: 0, duration: 0.5, ease: "power2.out" }, 1.05);
+      tl.from("#s1-stats", { y: 20, opacity: 0, duration: 0.6, ease: "power2.out" }, 1.3);
+      tl.from("#s1-corner",{ opacity: 0, duration: 0.5, ease: "power1.out" }, 1.6);
+
+      // ── TRANSITION 1→2: Blur crossfade at T=4.5 ──
+      tl.to("#scene1", { filter: "blur(10px)", scale: 1.03, opacity: 0, duration: 0.5, ease: "power2.inOut" }, 4.5);
+      tl.fromTo("#scene2",
+        { filter: "blur(10px)", scale: 0.97, opacity: 0 },
+        { filter: "blur(0px)", scale: 1, opacity: 1, duration: 0.5, ease: "power2.inOut" }, 4.6);
+
+      // ── SCENE 2 ENTRANCES ──
+      tl.to("#s2-ghost",      { opacity: 0.04, duration: 1.2, ease: "power1.out" }, 5.2);
+      tl.from("#s2-label",    { x: -20, opacity: 0, duration: 0.4, ease: "power3.out" }, 5.3);
+      tl.from("#s2-headline", { y: -30, opacity: 0, duration: 0.6, ease: "expo.out" }, 5.4);
+      tl.to(  "#s2-vrule",    { scaleY: 1, duration: 0.7, ease: "power3.out" }, 5.5);
+      tl.from("#s2-big",      { scale: 0.85, opacity: 0, duration: 0.6, ease: "back.out(1.4)" }, 5.65);
+      tl.from("#s2-biglab",   { y: 10, opacity: 0, duration: 0.4, ease: "power2.out" }, 5.85);
+      tl.from("#s2-card1",    { x: -30, opacity: 0, duration: 0.5, ease: "power3.out" }, 6.0);
+      tl.from("#s2-card2",    { x: -30, opacity: 0, duration: 0.5, ease: "power3.out" }, 6.2);
+      tl.from("#s2-card3",    { x: -30, opacity: 0, duration: 0.5, ease: "power3.out" }, 6.4);
+      tl.from("#s2-chips",    { y: 20, opacity: 0, duration: 0.5, ease: "power2.out" }, 6.6);
+      tl.from("#s2-corner",   { opacity: 0, duration: 0.4, ease: "power1.out" }, 6.8);
+
+      // ── TRANSITION 2→3: Staggered blocks at T=11.5 ──
+      tl.set("#wipe-a", { x: -1920 }, 11.49);
+      tl.set("#wipe-b", { x: -1920 }, 11.49);
+      tl.to("#wipe-a", { x: 0, duration: 0.25, ease: "power3.inOut" }, 11.5);
+      tl.to("#wipe-b", { x: 0, duration: 0.25, ease: "power3.inOut" }, 11.56);
+      tl.set("#scene2", { opacity: 0 }, 11.7);
+      tl.set("#scene3", { opacity: 1 }, 11.7);
+      tl.to("#wipe-a", { x: 1920, duration: 0.25, ease: "power3.inOut" }, 11.78);
+      tl.to("#wipe-b", { x: 1920, duration: 0.25, ease: "power3.inOut" }, 11.84);
+      tl.set("#scene2", { visibility: "hidden" }, 12.1);
+
+      // ── SCENE 3 ENTRANCES ──
+      tl.to("#s3-ghost",    { opacity: 0.07, duration: 1.2, ease: "power1.out" }, 12.2);
+      tl.from("#s3-marks",  { opacity: 0, duration: 0.3, ease: "power2.out" }, 12.2);
+      tl.from("#s3-label",  { x: -20, opacity: 0, duration: 0.4, ease: "power3.out" }, 12.3);
+      tl.from("#s3-small",  { y: 20, opacity: 0, duration: 0.4, ease: "power2.out" }, 12.4);
+      tl.from("#s3-dtf",    { y: 60, opacity: 0, duration: 0.7, ease: "expo.out" }, 12.55);
+      tl.from("#s3-premium",{ x: -40, opacity: 0, duration: 0.6, ease: "power3.out" }, 12.9);
+      tl.from("#s3-specs",  { x: 30, opacity: 0, duration: 0.6, ease: "power3.out" }, 13.0);
+      tl.to(  "#s3-rule",   { scaleX: 1, duration: 0.5, ease: "power3.out" }, 13.1);
+      tl.from("#s3-sub",    { y: 20, opacity: 0, duration: 0.5, ease: "power2.out" }, 13.3);
+      tl.from("#s3-corner", { opacity: 0, duration: 0.4, ease: "power1.out" }, 13.5);
+
+      // ── TRANSITION 3→4: Crossfade at T=16.5 ──
+      tl.to("#scene3", { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 16.5);
+      tl.fromTo("#scene4",
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, ease: "power2.inOut" }, 16.5);
+      tl.set("#scene3", { visibility: "hidden" }, 17.1);
+
+      // ── SCENE 4 ENTRANCES ──
+      tl.to("#s4-ghost",  { opacity: 0.04, duration: 1.2, ease: "power1.out" }, 17.1);
+      tl.from("#s4-label",{ x: -20, opacity: 0, duration: 0.4, ease: "power3.out" }, 17.2);
+      tl.from("#s4-q1",   { y: 60, opacity: 0, duration: 0.7, ease: "expo.out" }, 17.35);
+      tl.from("#s4-q2",   { y: 40, opacity: 0, duration: 0.6, ease: "expo.out" }, 17.55);
+      tl.from("#s4-sub",  { y: 20, opacity: 0, duration: 0.5, ease: "power2.out" }, 17.85);
+      tl.from("#s4-btn",  { scale: 0.9, opacity: 0, duration: 0.5, ease: "back.out(1.4)" }, 18.2);
+      tl.fromTo("#s4-accent", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.out" }, 18.5);
+      tl.from("#s4-brand",{ x: 30, opacity: 0, duration: 0.5, ease: "power2.out" }, 18.4);
+      tl.from("#s4-corner",{ opacity: 0, duration: 0.4, ease: "power1.out" }, 18.7);
+
+      // ── FINAL FADE OUT ──
+      tl.to("#scene4", { opacity: 0, duration: 0.5, ease: "power2.in" }, 21.5);
+      tl.set("#scene4", { visibility: "hidden" }, 22.0);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
